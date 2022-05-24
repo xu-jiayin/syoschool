@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+	/* 元素的样式 */
+	.list-item {
+		display: inline-block;
+	    margin-right: 10px;
+	    background-color: darkgreen;
+	    width: 30px;
+	    height: 30px;
+	    line-height: 30px;
+	    text-align: center;
+	    color: #ffffff;
+	}
+	/* 插入过程和移除过程的过渡效果 */
+	.num-enter-active,.num-leave-active{
+	    transition: all 1s;
+	}
+	/* 开始插入、移除结束时的状态 */
+	.num-enter, .num-leave-to {
+	    opacity: 0;
+	    transform: translateY(30px);
+	}
+	</style>
+
+	</head>
+	<body>
+	<div id="example">
+		<div>
+	    	<button v-on:click="add">插入一个数字</button>
+	    	<button v-on:click="remove">移除一个数字</button>
+	    	<transition-group name="num" tag="p">
+	      		<span v-for="item in items" v-bind:key="item" class="list-item">
+	        		{{item}}
+	      		</span>
+	    	</transition-group>
+	  	</div>
+	</div>
+	<script type="text/javascript">
+	//创建根实例
+	var vm = new Vue({
+		el:'#example',
+		data: {
+	        items: [1,2,3,4,5,6],
+	      	nextNum: 7
+	    },
+	  	methods: {
+			//生成随机数索引
+	    	randomNumber: function () {
+	      		return Math.floor(Math.random() * this.items.length)
+	    	},
+			//添加数字
+	    	add: function () {
+	      		this.items.splice(this.randomNumber(), 0, this.nextNum++)
+	    	},
+			//移除数字
+	    	remove: function () {
+	      		this.items.splice(this.randomNumber(), 1)
+	    	}
+	  	}
+	})
+	</script>
+	</body>
+</html>

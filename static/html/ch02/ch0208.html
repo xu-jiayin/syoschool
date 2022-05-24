@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表达式</title>
+<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+</head>
+<body>
+	
+<div id="box">
+	{{number+10}}<br />
+	{{boo ? '真':'假'}}<br />
+	{{str.toLowerCase()}}
+</div>
+<div id="box1">
+	邮箱地址：{{email}}<br>
+	QQ号码：{{email.substr(0,email.indexOf('@'))}}
+</div>
+<script type="text/javascript">
+var demo=new Vue({
+	el:'#box',
+	data:{
+		number:10,
+		boo:true,
+		str:'MJH MY LOVE'
+	}
+});
+</script>
+<script type="text/javascript">
+    var demo = new Vue({
+        el : '#box1',
+        data : {
+			email : '2071423464@qq.com'//定义邮箱地址
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
+
+

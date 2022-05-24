@@ -1,0 +1,83 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+
+
+</head>
+<body>
+	
+<div id="box">
+	<ul>
+		<li><a href="#"><span>[特惠]</span>{{title1 | subStr}}</a></li>
+        <li><a href="#"><span>[公告]</span>{{title2 | subStr}}</a></li>
+        <li><a href="#"><span>[特惠]</span>{{title3 | subStr}}</a></li>
+        <li><a href="#"><span>[公告]</span>{{title4 | subStr}}</a></li>
+        <li><a href="#"><span>[特惠]</span>{{title5 | subStr}}</a></li>
+	</ul>
+</div>
+<div id="box2">
+	<span>{{ str | lowercase | firstuppercase}}</span>
+</div>
+<div id="box3">
+	<span>{{ price | formatprice("￥") }}</span>
+</div>
+<script type="text/javascript">
+    var demo = new Vue({
+        el : '#box',
+        data : {
+			title1 : '111111111',
+			title2 : '222222222',
+			title3 : '111111111',
+			title4 : '222222222',
+			title5 : '111111111'
+        },
+		filters : {
+			subStr : function(value){
+				if(value.length > 10){               
+   					return value.substr(0,10)+"..."; 
+				}else{                               
+   					return value;                 
+				}
+			}
+		}
+    });
+	
+	var demo2=new Vue({
+		el:'#box2',
+		data:{
+			str:'HTML+CSS+JAVASCRIPT'
+		},
+		filters:{
+			lowercase:function(value){
+				return value.toLowerCase();
+			},
+			firstuppercase:function(value){
+				return value.charAt(0).toUpperCase()+value.subStr(1);
+			}
+		}
+	});
+	
+	var demo3=new Vue({
+		el:'#box3',
+		data:{
+			price:199
+		},
+		filters:{
+			formatprice:function(value,symbol){
+				return symbol +value.toFixed(2);
+			}
+		}
+	});
+	
+</script>
+
+
+
+</body>
+
+</html>
+
+
+

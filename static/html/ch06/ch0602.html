@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	<script type="text/javascript" src="../js/vue.js"UTF-8" ></script>
+		<body>
+		<div id="box1">
+		    <ul>
+		        <div v-on:click="show('div的事件触发')">
+				<button v-on:click.stop="show('按钮的事件触发')">显示</button>
+				</div>
+		    </ul>
+		</div>
+		<hr/>
+		<script type="text/javascript">
+		    var vm = new Vue({
+		        el: '#box1',
+		        methods: {
+		            show: function(message) {
+		                alert(message);
+		            }
+		        }
+		    });
+		</script>
+		
+
+	
+		
+		<div id="box">
+			<form name="form">
+				<div class="title">{{ptext}}-{{ptext2}} 添加商品信息</div>
+				
+				<div class="one">
+					
+					<label for="type">所属类别:</label>
+					
+					<select v-on:change="getPtext">
+						<option v-for="pmenu in menulist" v-bind:value="pmenu.text">
+							{{pmenu.text}}
+						</option>
+						
+					</select>
+					<select v-on:change="getstext">
+						<option v-for="submenu in getSubmenu" v-bind:value="submenu.text">
+							{{submenu.text}}
+						</option>
+						
+					</select>
+					
+				
+				</div>
+			
+			
+			</form>
+		</div>
+		<script type="text/javascript">
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				ptext:'数码设备',
+				ptext2:'数码设备',
+				menulist:[{
+					text:'数码设备',
+					submenu:[
+						{text:'数码相机'},
+						{text:'打印机'},
+						{text:"复印机"},
+						
+					]
+				},{
+					text:'家用电器',
+					submenu:[
+						{text:'家用电器111'},
+						{text:'家用电器222'},
+						{text:"家用电器333"},
+					]
+				},{
+					text:'礼品工艺',
+					submenu:[
+						{text:'鲜花'},
+						{text:'彩带'},
+						{text:"音乐盒"},
+						]
+				}]
+			},
+			methods: {
+				getPtext: function(event){ //获取主菜单项
+					this.ptext = event.target.value;
+					
+				this.ptext2='未选';
+				},
+				getstext:function(event){
+					this.ptext2=event.target.value;
+				}
+			},
+			computed:{
+				getSubmenu : function(){//获取子菜单
+					for(var i = 0; i< this.menulist.length;i++){
+						if(this.menulist[i].text == this.ptext){
+							return this.menulist[i].submenu;
+						}
+					}
+				}
+			}
+		});
+		</script>	
+		
+		
+		
+		
+		
+		
+		
+		</body>
+		</head>
+</html>

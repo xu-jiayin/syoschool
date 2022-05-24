@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" ></script>
+	</head>
+	<body>
+	<!-- css过渡 -->
+	<style type="text/css">
+	.fade-enter-active,.fade-leave-active{
+		transition:opacity 2s
+	}
+	.fade-enter,fade-leave-to{
+		opacity: 0
+	}
+	</style>
+	<div id="box1">
+		<button v-on:click="show=!show">切换</button>
+		<transition name="fade">
+			<p v-if="show">理想是人生的太阳</p>
+		</transition>
+	</div>
+	<hr />
+	<script type="text/javascript">
+	var vm=new Vue({
+		el:'#box1',
+		data:{
+			show:true
+		}
+	});
+	</script>
+	<!-- 过渡类名介绍 -->
+	<style type="text/css">
+	body{
+	font-family:微软雅黑}
+	.title{
+	font-size:16px;
+	cursor:pointer;}
+	.content{
+	font-size:14px;
+	width:500px;
+	line-height:30px;
+	margin-top:20px;
+	text-indent:30px;}
+	/* 设置过渡属性 */
+	.fade-enter-active, .fade-leave-active{
+	    transition: all .7s ease;
+	}
+	.fade-enter, .fade-leave-to{
+		transform: translateY(-20px);/*沿Y轴向上平移20px*/
+	    opacity: 0
+	}
+	</style>
+
+
+	<div id="box2" align="center">
+		<div class="title" v-on:click="show = !show">公司简介</div>
+		<transition name="fade">
+			<div align="left" class="content" v-if="show">
+				吉林省晨*科技有限公司是一家以计算机软件技术为核心的高科技型企业。公司创建于1999年12月，是专业的应用软件开发商和服务提供商。多年来始终致力于行业管理软件开发、数字化出版物开发制作、行业电子商务网站开发等，先后成功开发了涉及生产、管理、物流、营销、服务等领域的多种企业管理应用软件和应用平台，目前已成为计算机出版行业的知名品牌。
+			</div>
+		</transition>
+	</div>
+	<script type="text/javascript">
+	//创建根实例
+	var vm = new Vue({
+		el:'#box2',
+		data: {
+	        show : false	//默认不显示
+	    }
+	})
+	</script>
+	
+	
+	
+	
+	
+	</body>
+</html>

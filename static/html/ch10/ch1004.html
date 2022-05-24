@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<style type="text/css">
+		.fade-enter,fade-leave-to{
+			opacity: 0;
+		}
+		.fade-enter-active,.fade-leave-active{
+			transition:opacity .5s;
+		}
+		</style>
+		<div id="box1">
+			<button @click="change">切换</button>
+		<transition name="fade">
+			<p v-bind:key="getState">{{message}}</p>
+		</transition>
+		</div>
+		<hr >
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:'#box1',
+				data:{
+					index:0,
+					arr:['first','second','third']
+				},
+				computed:{
+					getState:function(){
+						return this.arr[this.index];
+					},
+					message:function(){
+						switch(this.getState){
+							case 'first':return'一鼓作气'
+							case 'second':return'再而衰'
+							case 'third':return'三而竭'
+						}
+					}
+				},
+				methods:{
+					change:function(){
+						this.index=(++this.index)%3;
+					}
+				}
+			});
+		</script>
+		<!-- 过渡模式 -->
+		<div id="box2">
+			<transition name="fade" mode="out-in">
+				<button @click="show=!show":key="show">{{show?'显示':'隐藏'}}</button>
+			</transition>
+		</div>
+		<hr >
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:'#box2',
+				data:{
+					show:true
+				}
+			});
+		</script>
+		<!--多组件过渡  -->
+		<div id="box3">
+			<button @click="toggle">切换组件</button>
+			<transition name="fade"mode="out-in">
+				<component :is="cName"></component>
+			</transition>
+		</div>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:'#box3',
+				data:{
+					cName:'componentA'
+				},
+				components:{
+					componentA:{
+						template:'<p>组件A</p>'
+					},
+					componentB:{
+						template:'<p>组件B</p>'
+					}
+				},
+				methods:{
+					toggle:function(){
+						this.cName = this.cName=='componentA'?'componentB':'componentA';
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

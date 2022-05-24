@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<style>
+.ys{
+	color: red;
+}
+
+</style>
+<body>
+   
+    <div id="box">
+        <div v-bind:class="{fontWeight : weight,'font-size' : fontSize + 'px'}">Vue.js样式绑定</div>
+    </div>
+    <hr>
+    <div id="box1">
+        <div class="ys" v-bind:style="styleObject">Vue.js样式绑定</div>
+    </div>
+    <hr>
+    <div id="example">
+        <div>
+            <form v-bind:style="searchForm">
+                <input v-bind:style="searchInput" type="text" placeholder="搜索">
+                <input v-bind:style="searchButton" type="submit" value="搜索">
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div id="box2">
+        <div  v-bind:style="show">Vue.js样式绑定</div>
+    </div>
+    <div id="box3">
+        <div v-bind:style="arrStyle">Vue.js样式绑定</div>
+    </div>
+    <div id="box4">
+        <div v-bind:style="[size,weight,decoration]">Vue.js样式绑定</div>
+    </div>
+    <div id="box5">
+        <div v-bind:style="[{fontSize : '24px'},{'font-weight': 'bold'},{'text-decoration':'underline'}]">Vue.js样式绑定</div>
+    </div>
+    <div id="example1">
+        <div v-bind:style="[baseStyle, fontStyle, styleRadius]">
+            <h4>枫桥夜泊</h4>
+            <p>
+                月落乌啼霜满天，<br>江枫渔火对愁眠。<br>姑苏城外寒山寺，<br>夜半钟声到客船。
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var exam = new Vue({
+            el:'#box',
+	        data:{
+                weight : 'bold',
+                fontSize : 30
+            }    
+        })
+        var exam = new Vue({
+            el:'#box1',
+	        data:{
+                styleObject : {
+                    fontWeight : 'bold',
+                    'font-size' : '30px'
+                }
+            }    
+        })
+        var vm = new Vue({
+	        el:'#example',
+	        data:{
+		        searchForm : {
+			    border: '2px solid #F03726',
+    		    'max-width': '670px'
+		        },
+		        searchInput : {
+			    'padding-left': '5px',
+			    height: '46px',
+			    width: '78%',
+			    outline: 'none',
+			    'font-size': '12px',
+			    border: 'none'
+		        },
+		        searchButton : {
+			    height: '50px',
+			    width: '20%',
+			    float: 'right',
+			    background: '#F03726',
+			    color: '#F5F5F2',
+			    'font-size': '18px',
+			    cursor: 'pointer',
+			    border: 'none'
+		        }
+	        }
+        })
+        var exam = new Vue({
+            el:'#box2',
+	        data:{
+                weight : 'bold',
+                fontSize : 30
+            },
+            computed:{
+                show : function(){
+                    return{
+                        fontWeight : this.weight,
+                        'font-size' : this.fontSize + 'px'
+                    }
+                }
+            }    
+        })
+        var exam = new Vue({
+            el:'#box3',
+	        data:{
+                arrStyle:[{
+                    fontSize : '24px'
+                },{
+                    'font-weight' : 'bold'
+                },{
+                    'text-decoration' : 'underline'
+                }]
+            }    
+        })
+        var exam = new Vue({
+            el:'#box4',
+            data:{
+                size :{fontSize : '24px'},
+                weight : {'font-weight':'bold'},
+                decoration : {'text-decoration':'underline'}
+            }
+        })
+        var exam = new Vue({
+            el:'#box5',
+        })
+        var vm = new Vue({
+            el:'#example1',
+            data:{
+                width : 400,
+                margin : '10px auto',
+                padding : 30,
+                bgcolor : 'lightblue',
+                family : "华文楷体",
+                fontSize : 36,
+                color : 'green',
+                align : 'center',
+                border : '1px solid #CCCCCC',
+                boxShadow : '3px 3px 6px #999999',
+                mode : 'vertical-rl'
+            },
+            computed: {
+                baseStyle: function () {
+                    return {
+                        width: this.width + 'px',
+                        margin: this.margin,
+                        padding: this.padding + 'px',
+                        'background-color': this.bgcolor
+                    }
+                },
+                fontStyle: function(){
+                    return {
+                        'font-family': this.family,
+                        fontSize: this.fontSize + 'px',
+                        color: this.color,
+                        'text-align': this.align
+                    }
+                },
+                styleRadius: function () {
+                    return { 
+                        border: this.border,
+                        'box-shadow': this.boxShadow,
+                        'writing-mode': this.mode
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

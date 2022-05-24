@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <!-- 单个复选框 -->
+    <div id="box1">
+        <p>单个复选框</p>
+        <input type="checkbox" v-model="checked" />
+        <label for="checkbox">checked:{{checked}}</label>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box1',
+            data: {
+                checked: 'false'
+            }
+        });
+    </script>
+    <!-- 多个复选框 -->
+    <div id="box2">
+        <p>单个复选框</p>
+        <input type="checkbox" value="oppo" v-model="brand" />
+        <label for="oppo">oppo</label>
+        <input type="checkbox" value="华为" v-model="brand" />
+        <label for="huawei">华为</label>
+        <input type="checkbox" value="小米" v-model="brand" />
+        <label for="xiaomi">小米</label>
+        <p>选择的手机品牌:{{brand}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box2',
+            data: {
+                brand: []
+            }
+        });
+    </script>
+    <!--  -->
+
+    <div id="box3">
+        <input type="checkbox" value="上网" v-model="checkedNames">
+        <label for="net">上网</label>
+        <input type="checkbox" value="旅游" v-model="checkedNames">
+        <label for="tourism">旅游</label>
+        <input type="checkbox" value="看书" v-model="checkedNames">
+        <label for="book">看书</label>
+        <input type="checkbox" value="电影" v-model="checkedNames">
+        <label for="movie">电影</label>
+        <input type="checkbox" value="游戏" v-model="checkedNames">
+        <label for="game">游戏</label>
+        <p v-if="checked">
+            您的兴趣爱好：{{result}}
+        </p>
+        <p>
+            <button @click="allChecked">全选</button>
+            <button @click="reverseChecked">反选</button>
+            <button @click="noChecked">全不选</button>
+        </p>
+        <hr />
+    </div>
+    <script type="text/javascript">
+        var exam = new Vue({
+            el: '#box3',
+            data: {
+                checked: false,
+                checkedNames: [],
+                checkedArr: ["上网", "旅游", "看书", "电影", "游戏"],
+                tempArr: []
+            },
+            methods: {
+                allChecked: function() { //全选
+                    this.checkedNames = this.checkedArr;
+                },
+                noChecked: function() { //全不选
+                    this.checkedNames = [];
+                },
+                reverseChecked: function() { //反选
+                    this.tempArr = [];
+                    for (var i = 0; i < this.checkedArr.length; i++) {
+                        if (!this.checkedNames.includes(this.checkedArr[i])) {
+                            this.tempArr.push(this.checkedArr[i]);
+                        }
+                    }
+                    this.checkedNames = this.tempArr;
+                }
+            },
+            computed: {
+                result: function() { //获取选中的兴趣爱好
+                    var show = "";
+                    for (var i = 0; i < this.checkedNames.length; i++) {
+                        show += this.checkedNames[i] + " ";
+                    }
+                    return show;
+                }
+            },
+            watch: {
+                "checkedNames": function() {
+                    if (this.checkedNames.length > 0) {
+                        this.checked = true //显示兴趣爱好
+                    } else {
+                        this.checked = false //隐藏兴趣爱好
+                    }
+                }
+            }
+        })
+    </script>
+   
+</body>
+
+</html>

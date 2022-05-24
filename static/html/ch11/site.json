@@ -1,0 +1,10 @@
+{
+	"name" :"网站",
+	"num":3,
+	"sites":[
+		{"name":"Google","info":["Android","google搜索","goodle翻译"]},
+		{"name":"Runob","info":["菜鸟","菜鸟工具","菜鸟微信"]},
+		{"name":"Taobao","info":["淘宝","网购"]},
+		{"name":"Tianmao","info":["天猫","网购"]}
+	]
+}

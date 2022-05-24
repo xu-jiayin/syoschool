@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<!-- 单行文本框 -->
+		<div id="box1">
+			<ul>
+				<p>单行文本框</p>
+				<input v-model="message" placeholder="单击此处编辑" />
+				<p>当前输入{{message}}</p>
+			</ul>
+		</div>
+		<hr/>
+		<script type="text/javascript">
+		var vm=new Vue({
+			el:'#box1',
+			data:{
+				message:''
+			}
+		});
+		</script>
+		<!-- 7-1 -->
+		<style>
+		body{
+		font-family:微软雅黑}
+		.search input{
+		width:350px;
+		height:30px;}
+		.item{
+		width:350px;
+		height:100px;
+		line-height:100px;
+		border-bottom:1px solid #999999;}
+		.item img{
+		width:100px;
+		float:left}
+		.item span{
+		height:100px;
+		line-height:100px;
+		}
+		</style>
+		<div id="box2">
+			<div class="search">
+				<input type="text" v-model="searchStr" placeholder="请输入搜索内容">
+			</div>
+			<div>
+				<div class="item" v-for="book in results">
+					<img :src="book.image">
+					<span>{{book.bookname}}</span>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<script type="text/javascript">
+		var exam = new Vue({
+			el:'#box2',
+			data:{
+				searchStr : '',//搜索关键字
+				books : [{//图书信息数组
+					bookname : '零基础学JavaScript',
+					image : 'images/js.jpg'
+				},{
+					bookname : '零基础学HTML5+CSS3',
+					image : 'images/js.jpg'
+				},{
+					bookname : '零基础学C语言',
+					image : 'images/js.jpg'
+				},{
+					bookname : 'JavaScript精彩编程200例',
+					image : 'images/js.jpg'
+				},{
+					bookname : 'HTML5+CSS3精彩编程200例',
+					image : 'images/js.jpg'
+				},{
+					bookname : 'Java精彩编程200例',
+					image : 'images/js.jpg'
+				}]
+			},
+			computed : {
+				results : function(){
+					var books = this.books;
+					if(this.searchStr == ''){
+						return books;
+					}
+					var searchStr = this.searchStr.trim().toLowerCase();//去除空格转换为小写
+					books = books.filter(function(ele){
+						//判断图书名称是否包含搜索关键字
+						if(ele.bookname.toLowerCase().indexOf(searchStr) != -1){
+							return ele;
+						}
+					});
+					return books;
+				}
+			}
+		})
+		</script>
+		<!-- 多行文本框 -->
+		<div id="box3"> 
+			<p>多行文本框</p>
+			<textarea v-model="message" placeholder="单击此处进行编辑"></textarea>
+			<p style="white-space:pre">{{message}}</p>
+		</div>
+		<script type="text/javascript">
+		var vm=new Vue({
+			el:'#box3',
+			data:{
+				message:''
+			}
+		});
+		</script>
+	</body>
+</html>

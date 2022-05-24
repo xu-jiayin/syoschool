@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+   
+
+    <!-- 绑定下拉菜单 -->
+    <div id="box6">
+        <select v-model="type">
+				<option value="">请选择种类</option>
+				<option>手机</option>
+				<option>平板电脑</option>
+				<option>笔记本</option>
+			</select>
+        <p>选择的种类:{{type}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box6',
+            data: {
+                type: ''
+            }
+        });
+    </script>
+    <!--  -->
+
+    <div id="box7">
+		<p>题目：xxxxxxxxx</p>
+		<p>A:aaaaaa</p>
+		<p>B:bbbbbb</p>
+		<p>C:cccccc</p>
+		<p>D:dddddd</p>
+        <select v-model="answer">
+			
+				<option value="">请选择答案</option>
+				<option v-for="item in items":value="item.value">{{item.text}}</option>
+			</select>
+        <p>您的答案:{{answer}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box7',
+            data: {
+                answer: '',
+                items: [{
+                    text: 'A',
+                    value: 'A'
+                }, {
+                    text: 'B',
+                    value: 'B'
+                }, {
+                    text: 'C',
+                    value: 'C'
+                }, {
+                    text: 'D',
+                    value: 'D'
+                }]
+            }
+        });
+    </script>
+    <!-- 多选 -->
+    <div id="box8">
+        <p>选择喜欢的影片类型</p>
+        <select v-model="filmtype" multiple="multiple" size="6">
+				<option >武侠片</option>
+				<option >爱情片</option>
+				<option >动作片</option>
+				<option >科幻片</option>
+				<option >喜剧片</option>
+				<option >恐怖片</option>				
+			</select>
+        <p>选择的类型:{{filmtype}}</p>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box8',
+            data: {
+                filmtype: []
+            }
+        });
+    </script>
+    <!--  -->
+
+    <style>
+        body {
+            font-family: 微软雅黑
+        }
+        
+        .left {
+            float: left;
+            width: 100px;
+            text-align: center
+        }
+        
+        .left select {
+            width: 80px;
+            margin-top: 10px;
+        }
+        
+        .middle {
+            float: left;
+            width: 32px;
+            padding-top: 40px;
+        }
+        
+        .middle input {
+            margin-top: 10px;
+        }
+        
+        #box9 {
+            height: 200px;
+        }
+        
+        .right {
+            float: left;
+            width: 100px;
+            display: block;
+            text-align: center
+        }
+        
+        .right select {
+            width: 80px;
+            margin-top: 10px;
+        }
+    </style>
+    <div id="box9">
+        <div class="left">
+            <span>可选职位</span>
+            <select size="6" multiple="multiple" v-model="job">
+					<option v-for="value in joblist" :value="value">{{value}}</option>
+				</select>
+        </div>
+        <div class="middle">
+            <input type="button" value=">>" v-on:click="toMyjob">
+            <input type="button" value="<<" v-on:click="toJob">
+        </div>
+        <div class="right">
+            <span>已选职位</span>
+            <select size="6" multiple="multiple" v-model="myjob">
+					<option v-for="value in myjoblist" :value="value">{{value}}</option>
+				</select>
+        </div>
+    </div>
+    <br>
+    <hr />
+
+    <script type="text/javascript">
+        var exam = new Vue({
+            el: '#box9',
+            data: {
+                joblist: ['歌手', '演员', '酒店管理', '教师', '公务员', '公司职员'], //所有职位列表
+                myjoblist: [], //已选职位列表
+                job: [], //可选职位列表选中的选项
+                myjob: [] //已选职位列表选中的选项
+            },
+            methods: {
+                toMyjob: function() {
+                    for (var i = 0; i < this.job.length; i++) {
+                        this.myjoblist.push(this.job[i]); //添加到已选职位列表
+                        var index = this.joblist.indexOf(this.job[i]); //获取选项索引
+                        this.joblist.splice(index, 1); //从可选职位列表移除
+                    }
+                    this.job = [];
+                },
+                toJob: function() {
+                    for (var i = 0; i < this.myjob.length; i++) {
+                        this.joblist.push(this.myjob[i]); //添加到可选职位列表
+                        var index = this.myjoblist.indexOf(this.myjob[i]); //获取选项索引
+                        this.myjoblist.splice(index, 1); //从已选职位列表移除
+                    }
+                    this.myjob = [];
+                }
+            }
+        })
+    </script>
+  
+</body>
+
+</html>

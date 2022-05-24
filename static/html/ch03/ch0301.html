@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>v-if指令</title>
+<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+
+</head>
+<body>
+	
+<div id="box">
+	<p>a的值是{{a}}</p>
+	<p>b的值是{{b}}</p>
+	<p v-if="a<b">a小于b</p>
+</div>
+<script type="text/javascript">
+		var demo=new Vue({
+			el:'#box',
+			data :{
+				a:100,
+				b:200
+			}
+		});
+		</script>
+
+
+</body>
+
+</html>
+
+
+

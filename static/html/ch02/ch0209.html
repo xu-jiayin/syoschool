@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+<style>
+span{
+font-size:16px;font-family:微软雅黑;color:#FF9900}
+</style>
+
+</head>
+<body>
+	
+<div id="box">
+	<span>{{date | nowdate}}</span>
+</div>
+<script type="text/javascript">
+	Vue.filter('nowdate',function(value){
+		var year=value.getFullYear();        
+		var month=value.getMonth()+1;        
+		var date=value.getDate();            
+		var day=value.getDay();              
+		var week="";                       
+		switch(day){
+		   case 1:                            
+			  week="星期一";                  
+			  break;                         
+		   case 2:                           
+			  week="星期二";                  
+			  break;                          
+		   case 3:                            
+			  week="星期三";                  
+			  break;                          
+		   case 4:                          
+			  week="星期四";                   
+			  break;                         
+		   case 5:                            
+			  week="星期五";                   
+			  break;                         
+		   case 6:                            
+			  week="星期六";                  
+			  break;                          
+		   default:                          
+			  week="星期日";                  
+			  break;                         
+		}
+		return "今天是："+year+"年"+month+"月"+date+"日 "+week;
+	});
+    var demo = new Vue({
+        el : '#box',
+        data : {
+			date : new Date()
+        }
+    });
+</script>
+
+
+</body>
+
+</html>
+
+
+

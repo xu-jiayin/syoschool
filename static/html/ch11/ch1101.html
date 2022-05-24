@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../js/vue.js" type="text/javascript" charset="UTF-8" ></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="UTF-8" ></script>
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<div id="box">
+			<h1>使用 Vue.js 做项目的时候，一个页面是由多个组件构成的，所以在跳转页面的时候，并不适合用传统的href，于是vue-router应运而生</h1>
+			<p>
+				<router-link to="/first">第一章</router-link>
+	            <router-link to="/second">第二章</router-link>
+	            <router-link to="/third">第三章</router-link>
+			</p>
+			<router-view></router-view>
+		</div>
+		<script type="text/javascript">
+			var first = {
+            template: '<div>组件1111111</div>'
+        };
+        var second = {
+            template: '<div>组件2222222</div>'
+        };
+        var third = {
+            template: '<div>组件3333333</div>'
+        };
+        var routes = [
+            { path: '/first', component: first },
+            { path: '/second', component: second },
+            { path: '/third', component: third }
+        ];
+        var router = new VueRouter({
+            routes
+        });
+        var app = new Vue({
+            router
+        }).$mount('#box');
+		</script>
+	</body>
+</html>

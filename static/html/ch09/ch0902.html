@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h3 style="text-align: center;">徐佳银</h3>
+    <!-- 什么是prop -->
+    <div id="box1">
+        <my-component message="理想是人生的太阳"></my-component>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.component('my-component', {
+            props: ['message'],
+
+            template: '<p>{{message}}</p>'
+        })
+        var vm = new Vue({
+            el: '#box1'
+        })
+    </script>
+    <!-- prop的大小写1 -->
+    <div id="box2">
+        <my-component myTitle="诗与远方"></my-component>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.component('my-component', {
+            props: ['mytitle'],
+
+            template: '<p>{{mytitle}}</p>'
+        })
+        var vm = new Vue({
+            el: '#box2'
+        })
+    </script>
+    <!-- prop的大小写2 -->
+    <div id="box3">
+        <my-component my-title="诗与远方"></my-component>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.component('my-component', {
+            props: ['myTitle'],
+
+            template: '<h2>{{myTitle}}</h2>'
+        })
+        var vm = new Vue({
+            el: '#box3'
+        })
+    </script>
+    <!-- 传递动态prop -->
+    <div id="box4">
+        <my-component v-bind:boxoffice="boxoffice"></my-component>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.component('my-component', {
+            props: ['boxoffice'],
+            template: '<p>该电影票房达到了{{boxoffice}}亿元</p>'
+        })
+        var vm = new Vue({
+            el: '#box4',
+            data: {
+                boxoffice: 20
+            }
+        })
+    </script>
+    <!--  -->
+    <style>
+        img {
+            width: 240px;
+            height: 172px;
+        }
+        
+        .movie_name {
+            padding-left: 10px;
+            font-size: 18px;
+            color: #333333;
+            margin-top: 8px;
+        }
+        
+        .movie_des {
+            padding-left: 10px;
+            font-size: 14px;
+            color: #7a7a7a;
+            margin-top: 5px;
+        }
+    </style>
+    <div id="box5">
+        <my-movie :img="imgUrl" :name="name" :description="description"></my-movie>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        //注册全局组件
+        Vue.component('my-movie', {
+                props: ['img', 'name', 'description'], //传递动态Prop
+                template: '<div> \
+				<img :src="img"> \
+				<div class="movie_name">{{name}}</div> \
+				<div class="movie_des">{{description}}</div> \
+			  </div>'
+            })
+            //创建根实例
+        var vm = new Vue({
+            el: '#box5',
+            data: {
+                imgUrl: 'js.jpg',
+                name: '我是传奇',
+                description: '末世科幻动作电影'
+            }
+        })
+    </script>
+
+
+
+
+    <div id="box6">
+        <my-item :list="type"></my-item>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.component('my-item', {
+            props: ['list'],
+            template: '<ol><li v-for="item in list">{{item}}</li></ol>'
+        })
+        var vm = new Vue({
+            el: '#box6',
+            data: {
+                type: ['HTML', 'CSS', 'JavaScript']
+            }
+        })
+    </script>
+    <!-- -->
+    <div id="box7">
+        <my-shop v-bind="shop"></my-shop>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.component('my-shop', {
+            props: ['name', 'price', 'number'],
+            template: '<div>\
+				<div>名称:{{name}}</div>\
+				<div>价格:{{price}}</div>\
+				<div>数量:{{number}}</div>\
+				</div>'
+        })
+        var vm = new Vue({
+            el: '#box7',
+            data: {
+                shop: {
+                    name: '华为',
+                    price: 3000,
+                    number: 10
+                }
+            }
+        })
+    </script>
+    <!-- prop验证-->
+
+
+</body>
+
+</html>

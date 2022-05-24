@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>v-else指令</title>
+<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+</head>
+<body>
+	
+<div id="box">
+	<p>a的值是{{a}}</p>
+	<p>b的值是{{b}}</p>
+	<p v-if="a<b">a小于b</p>
+	<p v-else>a大于b</p>
+</div>
+
+<div id="box1">
+	<p v-if="(year%4==0 && year%100!=0) || year%400==0">
+		{{show(29)}}
+	</p>
+	<p v-else>
+		{{show(28)}}		
+	</p>
+</div>
+<script type="text/javascript">
+		var demo=new Vue({
+			el:'#box',
+			data :{
+				a:200,
+				b:100
+			}
+		});
+		</script>
+
+<script type="text/javascript">
+		var demo=new Vue({
+			el:'#box1',
+			data :{
+				year:2019
+			},
+			methods : {
+				show : function(days){
+					alert(this.year+'年2月有'+days+'天');//弹出对话框
+				}
+			}
+		});
+</script>
+
+
+</body>
+
+</html>
+
+
+

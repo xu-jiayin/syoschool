@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>选项卡切换效果</title>
+
+
+<style type="text/css">
+*{
+margin:0;
+padding:0;
+overflow:hidden;}
+body{
+font-family:微软雅黑}
+.box{
+width:270px;
+margin:20px auto;}
+.top{
+height:26px;line-height: 26px;}
+.title{display:inline-block;
+font-size:22px;}
+ul.tabs{display:inline-block;
+list-style:none;
+margin-left:70px;
+}
+ul.tabs li{
+margin: 0;
+padding: 0;
+float:left;
+width:50px;
+height: 26px; 
+line-height: 26px;
+font-size:16px;
+cursor:pointer;
+text-align:center
+}
+ul.tabs li.active{
+display:block;
+width:50px;
+height: 26px; 
+line-height: 26px;
+background-color:#ff007f;
+color:#FFFFFF;
+cursor:pointer;}
+.main{
+clear:both;
+margin-top:10px;}
+.main div{
+width:270px;
+height:43px;
+line-height:43px;
+border-bottom-width: 1px;
+border-bottom-style: dashed;
+border-bottom-color: #333333;
+background-color: #FFFFFF;
+font-size:14px;}
+.main div span{
+margin-left:10px;
+}
+.main div span:last-child{
+float:right;
+margin-right:10px;
+}
+</style>
+<script src="../JS/vue.js"></script>
+</head>
+<body>
+<div id="box">
+	<div class="box">
+		<div class="top">
+			<span class="title">电影排行</span>
+			<ul class="tabs">
+				<li :class="{active : active}" v-on:mouseover="toggleAction('hit')">热播</li>
+				<li :class="{active : !active}" v-on:mouseover="toggleAction('classic')">经典</li>
+			</ul>
+		</div>
+		<component :is="current" :hitmovie="hitmovie" :classicmovie="classicmovie"></component>
+	</div>
+</div>
+<script type="text/javascript">
+
+var vm = new Vue({
+	el : '#box',
+	data : {
+		active : true,
+		current : 'hit',
+		hitmovie : [
+			{ name : 'aaaaa', star : '1111' },
+			{ name : 'bbbbb', star : '2222' },
+			{ name : 'ccccc', star : '3333' },
+			{ name : 'dddd', star : '44444' },
+			{ name : 'eeee', star : '5555' },
+			{ name : 'ffff', star : '6666' },
+			{ name : 'gggg', star : '7777' }
+		],
+		classicmovie : [
+			{ name : 'hhhh', star : '8888' },
+			{ name : 'iiii', star : '9999' },
+			{ name : 'jjjj', star : '1010' },
+			{ name : 'kkkk', star : '111111' },
+			{ name : 'llll', star : '121212' },
+			{ name : 'mmmm', star : '13313' },
+			{ name : 'nnnn', star : '141414' }
+		]
+	},
+	methods : {
+		toggleAction : function(value){
+			this.current=value;
+			value == 'hit' ? this.active = true : this.active = false;
+		}
+	},
+	//注册局部组件
+	components : {
+		hit : {
+			props : ['hitmovie'],//传递Prop
+			template : `<div class="main"><div v-for="(item,index) in hitmovie">
+    			<span>{{++index}}</span>
+    			<span>{{item.name}}</span>
+				<span>{{item.star}}</span>
+  		  	  </div></div>`
+		},
+		classic : {
+			props : ['classicmovie'],//传递Prop
+			template : `<div class="main"><div v-for="(item,index) in classicmovie">
+    			<span>{{++index}}</span>
+    			<span>{{item.name}}</span>
+				<span>{{item.star}}</span>
+  		  	  </div></div>`
+		}
+	}
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

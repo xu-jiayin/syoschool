@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组更新检测</title>
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+	
+	</head>
+	<style>
+	body{
+	font-family:微软雅黑;
+	font-size:14px}
+	.title{
+	background:#F0F7FF
+	font-size:18px;
+	}
+	
+	.title,.content{
+	width:420px;
+	line-height:15px;
+}
+	
+	.title div{
+	text-align:center;
+	float:left}
+	.title .col-1,.col-1{
+	width:70px;}
+	.title .col-2, .col-2{
+	width:260px;}
+	
+	.content div{
+	text-align:center;
+	float:left}
+	</style>
+	<body>
+		
+		<div id="box">
+			<ul>
+				<li v-for="item  in  items">{{item.name}}</li>
+			</ul>
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+		var demo = new Vue({
+		    el : '#box',
+		    data : {
+				items : [
+					{ name: '张三'},
+					{ name: '李四'},
+					{ name: '王五'}
+				]
+			   }
+			});
+			
+			demo.items.push({ name : '赵六' });
+			demo.items=demo.items.slice(1);
+			Vue.set(demo.items,1,{name:'张三'});
+			demo.items.splice(2);
+		</script>
+		<div id="example">
+			<div class="title">
+				<div class="col-1">排名</div>
+				<div class="col-2">电影名称</div>
+				<div class="col-1">票房</div>
+			</div>
+			<div class="content" v-for="(value,index) in movie">
+				<div class="col-1">{{index + 1}}</div>
+				<div class="col-2">{{value.name}}</div>
+				<div class="col-1">{{value.boxoffice}}亿</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var exam = new Vue({
+			el:'#example',
+			data:{
+				movie : [
+					{ name : '西虹市首富',boxoffice : 25.4 },
+					{ name : '毒液：致命守护者',boxoffice : 18.7 },
+					{ name : '我不是药神',boxoffice : 30.9 },
+					{ name : '红海行动',boxoffice : 36.5 },
+					{ name : '侏罗纪世界2',boxoffice : 16.9 },
+					{ name : '复仇者联盟3：无限战争',boxoffice : 23.9 },
+					{ name : '头号玩家',boxoffice : 13.9 },
+					{ name : '唐人街探案2',boxoffice : 33.9 },
+					{ name : '捉妖记2',boxoffice : 22.3 },
+					{ name : '海王',boxoffice : 19.5 }
+				]
+			}
+		})
+	
+		exam.movie.sort(function(a,b){
+			var x = a.boxoffice;
+			var y = b.boxoffice;
+			return x < y ? 1 : -1;
+		});
+		</script>
+		
+
+	</body>
+</html>

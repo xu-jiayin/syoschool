@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<style type="text/css">
+		p{
+			font: 30px "微软雅黑";/*设置字体和字体大小*/
+			margin:30px auto; /*设置元素外边距*/
+			font-weight: 500; /*设置字体粗细*/
+			color: #f35626;/*设置文字颜色*/
+		}
+		/* 设置animation属性的参数 */
+		.scaling-enter-active{
+		    animation: scaling 1s
+		}
+		.scaling-leave-active{
+		    animation: scaling 1s reverse
+		}
+		/* 设置元素的缩放转换 */
+		@keyframes scaling {
+		  	0% {
+		    	transform: scale(0);
+		  	}
+		  	50% {
+		    	transform: scale(1.2);
+		  	}
+		  	100% {
+		    	transform: scale(1);
+		  	}
+		}
+		</style>
+		<!-- css动画 -->
+		
+		<div id="box1" align="center">
+			<button v-on:click="show = !show">切换显示</button>
+			<transition name="scaling">
+				<p v-if="show">机会总是留给有准备的人</p>
+			</transition>
+		</div>
+		<hr >
+		<script type="text/javascript">
+		//创建根实例
+		var vm = new Vue({
+			el : '#box1',
+			data : {
+				show : true
+			}
+		});
+		</script>
+		<!-- 自定义过渡类名 -->
+	<div id="box2" align="center">
+		<button v-on:click="show = !show">切换显示</button>
+		<transition name="rotate" enter-active-class="animated rotateIn" leave-active-class="animated rotateOut">
+			<p v-if="show">锲而不舍</p>
+		</transition>
+	</div>
+	<script type="text/javascript">
+	//创建根实例
+	var vm = new Vue({
+		el : '#box2',
+		data : {
+			show : true
+		}
+	});
+	</script>
+		
+		
+	</body>
+</html>

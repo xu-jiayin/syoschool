@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="box">
+        <ul><br>
+            <li v-for="value in object">{{ value }}</li>
+        </ul>
+    </div>
+    <div id="box2">
+        <ul><br>
+            <li v-for="(value,key) in object">{{ key }} : {{ value }}</li>
+        </ul>
+    </div>
+    <div id="box3">
+        <ul><br>
+            <li v-for="(value,key,index) in object">{{index}} - {{ key }} : {{ value }}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var demo = new Vue({
+            el : '#box',
+            data : {
+               object : {
+                   name : '张三',
+                   sex : '男',
+                   age : 25
+               }
+            }
+        });
+        var demo = new Vue({
+            el : '#box2',
+            data : {
+               object : {
+                   name : '张三',
+                   sex : '男',
+                   age : 25
+               }
+            }
+        });
+        var demo = new Vue({
+            el : '#box3',
+            data : {
+               object : {
+                   name : '张三',
+                   sex : '男',
+                   age : 25
+               }
+            }
+        });
+    </script>
+</body>
+</html>

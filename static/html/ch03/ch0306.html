@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<title>应用v-for指令遍历数组</title>
+		<style>
+		body{
+		font-family:微软雅黑}
+		.title{
+		background: #f6f6f6;
+		font-size:18px;
+		}
+		.title,.content{
+		width:510px;
+		height:36px;
+		line-height:36px;
+		border: 1px solid #dddddd;}
+		.title div{
+		text-align:center;
+		float:left}
+		.title .col-1,.content .col-1{
+		width:80px;}
+		.title .col-2,.content .col-2{
+		width:270px;}
+		.content{
+		clear:both}
+		.content div{
+		text-align:center;
+		float:left}
+		</style>
+	</head>
+	<body>
+
+		<div id="box">
+			<ul>
+				<li v-for="item in items">{{item.name}}</li>
+			</ul>
+		</div>
+
+		<div id="box1">
+			<ul>
+				<li v-for="(item,index) in items">{{index}} - {{item.name}}</li>
+			</ul>
+		</div>
+
+		<div id="box2">
+			<div class="title">
+				<div class="col-1">序号</div>
+				<div class="col-1">省份</div>
+				<div class="col-1">省会</div>
+				<div class="col-2">旅游景点</div>
+			</div>
+			<div class="content" v-for="(tourist,index) in touristlist">
+				<div class="col-1">{{index + 1}}</div>
+				<div class="col-1">{{tourist.province}}</div>
+				<div class="col-1">{{tourist.city}}</div>
+				<div class="col-2">{{tourist.spot}}</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var demo = new Vue({
+				el: '#box',
+				data: {
+					items: [ //定义人物名称数组
+						{
+							name: '张三'
+						},
+						{
+							name: '李四'
+						},
+						{
+							name: '王五'
+						}
+					]
+				},
+			});
+		</script>
+
+		<script type="text/javascript">
+			var demo = new Vue({
+				el: '#box1',
+				data: {
+					items: [ //定义人物名称数组
+						{
+							name: '张三'
+						},
+						{
+							name: '李四'
+						},
+						{
+							name: '王五'
+						}
+					]
+				},
+			});
+		</script>
+
+		<script type="text/javascript">
+			var demo = new Vue({
+				el: '#box2',
+				data: {
+					touristlist: [{
+						province: '黑龙江省',
+						city: '哈尔滨市',
+						spot: '太阳岛 圣索菲亚教堂 伏尔加庄园'
+					}, {
+						province: '吉林省',
+						city: '长春市',
+						spot: '净月潭 长影世纪城 伪满皇宫'
+					}, {
+						province: '辽宁省',
+						city: '沈阳市',
+						spot: '沈阳故宫 沈阳北陵 张氏帅府'
+					}]
+				}
+			});
+		</script>
+	</body>
+</html>

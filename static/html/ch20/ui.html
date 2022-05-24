@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <!-- <script src="../js/elment-ui.js"></script>
+    <link rel="stylesheet" href="../css/elment-ui.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <title>ui</title>
+</head>
+
+<body>
+    <div id="app">
+        <el-button @click="visible = true">弹消息框</el-button>
+        <el-dialog :visible.sync="visible" title="消息标题">
+            <p>消息内容！</p>
+            <ol>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ol>
+        </el-dialog>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        data() {
+            return {
+                visible: false
+            }
+        }
+    }).$mount('#app');
+</script>
+
+</html>

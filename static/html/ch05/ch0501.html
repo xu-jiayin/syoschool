@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/vue.js" charset="UTF-8" ></script>
+	</head>
+	
+		<style type="text/css">
+			body{
+		font-family:微软雅黑}
+	.search input{
+		width:350px;
+		height:30px;}
+	.item{
+		width:350px;
+		height:100px;
+		line-height:100px;
+		border-bottom:0px ;
+		}
+	.item img{
+		width:100px;
+		float:left}
+	.active{
+		height:100px;
+		line-height:100px;
+		color:#FF0000
+	}
+	
+		.default{
+			text-decoration:underline;
+		}
+		.size{
+			font-size: 18px;
+		}
+		.color{
+			color: red;
+		}
+		
+		.line{
+			text-decoration: line-through;
+		}
+		.size{
+			font-size: 24px;
+		}
+			
+			.activel{
+				font-style: italic;
+				color: #000000;
+			}
+		</style>
+		
+		
+	<body>
+		
+		
+		<br />
+		<div  id="box">
+			<div v-bind:class="{activel : isActive}">Vue.js样式绑定</div>
+		</div>
+		<hr />
+		
+		<div id="example">
+		<div>
+			<div class="item" v-for="book in books">
+				<img v-bind:src="book.image">
+				<span v-bind:class="{active: book.active}">{{book.bookname}}</span>
+			</div>
+		</div>	
+		</div>
+		
+		<div id="box1">
+			<div class="default" v-bind:class="{size : isSize,color : isColor}">Vue.js样式绑定</div>
+		</div>
+		<hr />
+		
+		<div id="box2">
+			<div class="default" v-bind:class="classObject">Vue.js样式绑定</div>
+		</div>
+		<hr />
+		
+		<div id="box3">
+			<div class="default" v-bind:class="show">Vue.js样式绑定</div>
+		</div>
+		<hr />
+		
+		<div id="box4">
+			<div v-bind:class="[lineClass,sizeClass]">Vue.js样式绑定</div>
+		</div>
+		<hr />
+		
+		<div id="box5">
+        <div v-bind:class="[isLine ? 'line' : '', sizeClass]">Vue.js样式绑定</div>
+    </div>
+    <hr>
+    
+    <div id="box6">
+        <div v-bind:class="[{line : isLine}, sizeClass]">Vue.js样式绑定</div>
+    </div>
+    <hr>
+		
+		<script type="text/javascript">
+			var vm=new Vue({
+				el : '#box',
+				data:{
+					isActive : true
+				}
+			});
+			
+			var vm=new Vue({
+				el : '#example',
+				data:{
+					books :[{
+						bookname :'零基础学JavaScript',
+						image : 'js.jpg',
+						active : true
+					},{
+						bookname :'零基础学JavaScript',
+						image : 'js.jpg',
+						active : false
+					},{
+						bookname :'零基础学JavaScript',
+						image : 'js.jpg',
+						active : false
+					},{
+						bookname :'零基础学JavaScript',
+						image : 'js.jpg',
+						active : true
+					}]
+				}
+			});
+			
+			var vm =new Vue({
+				el : '#box1',
+				data :{
+					isSize : true,
+					isColor : true
+				}
+			});
+			
+			var vm =new Vue({
+				el : '#box2',
+				data :{
+					classObject:{
+						size : true,
+						color : true
+					}
+				}
+			});
+			
+			var vm=new Vue({
+				el :'#box3',
+				data :{
+					isSize : true,
+					isColor : true
+				},
+				computed:{
+					show :function(){
+						return{
+							size : this.isSize,
+						color : this.isColor
+						}
+					}
+				}
+			});
+			
+			var vm=new Vue({
+				el : '#box4',
+				data :{
+					lineClass : 'line',
+					sizeClass : 'size'
+				}
+			});
+			
+			var exam = new Vue({
+            el:'#box5',
+	        data:{
+                isLine : true,
+                sizeClass : 'size'
+            }    
+        });
+
+        var exam = new Vue({
+            el:'#box6',
+	        data:{
+                isLine : true,
+                sizeClass : 'size'
+            }    
+        });
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+    <title>Document</title>
+</head>
+<style>
+body{
+font-family:微软雅黑}
+.title{
+background: white;
+font-size:18px;
+}
+.title,.content{
+width:510px;
+height:36px;
+line-height:36px;
+border: 1px solid white;}
+.title div{
+text-align:center;
+float:left}
+.title .col-1,.content .col-1{
+width:80px;}
+.title .col-2,.content .col-2{
+width:270px;}
+.content{
+clear:both}
+.content div{
+text-align:center;
+float:left}
+</style>
+<body>
+   
+    <div id="box">
+        <ul><br>
+            <li v-for="(value,key) in object">{{ key }} : {{ value }}</li>
+        </ul>
+    </div>
+    <div id="box2">
+        <ul><br>
+            <li v-for="(value,key) in object">{{ key }} : {{ value }}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var demo = new Vue({
+            el : '#box',
+            data : {
+               object : {
+                   name : '张三',
+                   sex : '男',
+                   age : 25
+               }
+            }
+        });
+        Vue.set(demo.object,'interest','唱歌');
+        var demo = new Vue({
+            el : '#box2',
+            data : {
+               object : {
+                   name : '张三',
+                   sex : '男',
+                   age : 25
+               }
+            }
+        });
+        demo.object = Object.assign({},demo.object,{
+            interest : '唱歌',
+            address : '长春市'
+        });
+    </script>
+	
+	<div id="box3">
+		<div class="title">
+			<div class="col-1">序号</div>
+			<div class="col-1">省份</div>
+			<div class="col-1">省会</div>
+			<div class="col-2">旅游景点</div>
+		</div>
+		<div class="content" v-for="(tourist,index) in touristlist">
+			<div class="col-1">{{index + 1}}</div>
+			<div class="col-1">{{tourist.province}}</div>
+			<div class="col-1">{{tourist.city}}</div>
+			<div class="col-2">{{tourist.spot}}</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	    var demo = new Vue({
+	        el : '#box3',
+	        data : {
+				touristlist : [{ //定义旅游信息列表
+					province : '黑龙江省', 
+					city : '哈尔滨市', 
+					spot : '太阳岛 圣索菲亚教堂 伏尔加庄园' 
+				},{ 
+					province : '吉林省', 
+					city : '长春市', 
+					spot : '净月潭 长影世纪城 伪满皇宫' 
+				},{ 
+					province : '辽宁省', 
+					city : '沈阳市', 
+					spot : '沈阳故宫 沈阳北陵 张氏帅府' 
+				}]
+			}
+	    });
+	</script>
+</body>
+</html>

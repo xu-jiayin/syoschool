@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+  
+    <!-- 使用修饰符-->
+    <div id="box13">
+        <input v-model.lazy="message" placeholder="点击此处进行编辑">
+        <p>当前输入:{{message}}</p>
+    </div>
+    <hr />
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box13',
+            data: {
+                message: ''
+            }
+        });
+    </script>
+    <!-- number-->
+    <div id="box14">
+        <input v-model.number="message" placeholder="点击此处进行编辑">
+        <p>当前输入:{{message}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box14',
+            data: {
+                message: ''
+            }
+        });
+    </script>
+    <!-- trim-->
+    <div id="box15">
+        <input v-model.trim="message" placeholder="点击此处进行编辑">
+        <p>当前输入:{{message}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box15',
+            data: {
+                message: ''
+            }
+        });
+    </script>
+<!-- 上机指导 -->
+
+
+   
+</body>
+
+</html>

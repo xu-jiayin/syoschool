@@ -1,0 +1,40 @@
+<IDOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./axios.min.js"type="text/javascript"charset="utf-8"></script>
+<script src="../js/vue.js"type="text/javascript"charset="utf-8"></script>
+<style>
+</style>
+</head>
+<body>
+<div id="box">
+<h1>网站列表</h1>
+<div v-for="site in info">
+{{site.name }}
+</div>
+</div>
+<script type ="text/javascript">
+new Vue({
+el:'#box',
+data (){
+return{
+	info:null,
+}
+
+
+},
+mounted(){
+	axios
+	.get('http://127.0.0.1:8848/Vue/src/ch11/site.json')
+	.then(response=>(this.info=response.data.sites))
+	.catch(function(error){
+	console.log(error);{}
+	});
+	}
+})
+
+	
+</script>
+</body>
+</html>

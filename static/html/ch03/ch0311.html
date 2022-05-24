@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>应用v-for遍历对象</title>
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+			</head>
+<body>
+		
+		<div id="example">
+			<ul>
+				<li v-for="n in 5">员工第{{n}}年工龄工资为{{n*salary}}元</li>
+			</ul>
+		</div>
+		
+		
+		
+		<div id="demo">
+		    <div v-for="n in 9">
+				<span v-for="m in n">
+					{{m}}*{{n}}={{m*n}}
+				</span>
+		    </div>
+		</div>
+		
+		<script type="text/javascript">
+			var exam=new Vue({
+				el:'#example',
+					data : {
+					salary:30
+					}
+				
+				
+			})
+		
+		</script>
+		<script type="text/javascript">
+		    var demo = new Vue({
+		        el : '#demo'
+		    });
+		</script>
+</body>
+</html>

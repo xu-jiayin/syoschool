@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+	<style type="text/css">
+	/* p{
+		font: 30px "微软雅黑";/*设置字体和字体大小*/
+		margin:50px auto; /*设置元素外边距*/
+		font-weight: 500; /*设置字体粗细*/
+		color: #f35626;/*设置文字颜色*/
+	} */
+	/* 设置元素的缩放转换 */
+	@keyframes scaling {
+	  	0% {
+	    	transform: scale(0);
+	  	}
+	  	50% {
+	    	transform: scale(1.2);
+	  	}
+	  	100% {
+	    	transform: scale(1);
+	  	}
+	}
+	/*创建旋转动画*/
+	@-webkit-keyframes rotate{
+	   0%{
+	      -webkit-transform:rotateZ(0) scale(1);
+	   }50%{
+	      -webkit-transform:rotateZ(360deg) scale(0.5);
+	   }100%{
+	      -webkit-transform:rotateZ(720deg) scale(0);
+	   }
+	}
+	</style>
+	<div id="example" align="center">
+		<button v-on:click="show = !show">切换显示</button>
+		<transition v-on:enter="enter"v-on:leave="leave"v-on:after-leave="afterLeave">
+			<p v-if="show">勤能补拙</p>
+		</transition>
+	</div>
+	<hr >
+	<script type="text/javascript">
+	//创建根实例
+	var vm = new Vue({
+		el : '#example',
+		data : {
+			show : false
+		},
+		methods: {
+			enter: function (el, done) {
+				el.style.opacity = 1;
+				el.style.animation= 'scaling 1s';//实现缩放效果
+				done();
+			},
+			leave: function (el, done) {
+				el.style.animation= 'rotate 2s linear';//实现旋转效果
+				setTimeout(function(){
+	              	done();
+	            }, 1900)
+			},
+			//在leave函数中触发回调后执行afterLeave函数
+			afterLeave: function (el) {
+				el.style.opacity = 0;
+			}
+	  	}
+	});
+	</script>
+	
+	<!-- 多元素过渡 -->
+		<style type="text/css">
+		.fade-enter,fade-leave-to{
+			opacity: 0;
+		}
+		.fade-enter-active,.fade-leave-active{
+			transition:opacity .5s;
+		}
+		</style>
+		<div id="box2">
+			<button @click="clear">清空</button>
+			<transition name="fade">
+				<ol v-if="items.length >0">
+				<li v-for="item in items">{{item}}</li>
+				</ol>
+				<p v-else>列表为空</p>
+			</transition>
+		</div>
+		<hr >
+		<script type="text/javascript">
+		var vm=new Vue({
+			el:'#box2',
+			data:{
+				items:['11111','2222','3333']
+			},
+			methods:{
+				clear:function(){
+					this.items.splice(0);
+				}
+			}
+		});
+		</script>
+<!-- key属性 -->
+<div id="box3" align="center">
+		<button v-on:click="show = !show">切换显示</button>
+		<transition name="fade">
+			<p v-if="show" key="m">山不在高以仙之名</p>
+			<p v-else="show" key="w">水不在深有龙则灵</p>
+		</transition>
+	</div>
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:'#box3',
+			data:{
+				show:true
+			}
+		})
+	</script>
+
+	</body>
+</html>

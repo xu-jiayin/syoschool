@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="../vue.js" type="text/javascript"  charset="utf-8"></script><style type="text/css">
+<style>
+.title{
+	color:#FF0000;
+	border:1px solid #FF00FF; 
+	display:inline-block;
+	padding:5px;
+}
+
+.myImg{
+	width:300px;
+	border:1px solid #000000; 
+}
+</style>
+</head>
+<body>
+	
+<div id="box">
+	<span v-bind:class="value">梦想照进现实</span>
+</div>
+<div id="box1">
+	<img :src="src" :class="value" :title="tip">
+</div>
+<script type="text/javascript">
+    var demo = new Vue({
+        el : '#box',
+        data : {
+            value : 'title'//定义绑定的属性值
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el : '#box1',
+        data : {
+			src : 'images/js.jpg',//图片URL
+            value : 'myImg',//图片CSS类名
+			tip : '零基础学JavaScript'//图片提示文字
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
+
+

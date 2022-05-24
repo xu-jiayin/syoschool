@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+			</head>
+	<body>
+		
+		<div id="box">
+			<h3>网站名称:{{ name }}</h3>
+			<h3>url:{{ url }}</h3>
+		</div>
+		<script type="text/javascript">
+		var data={name:"明日学院",url:"www.fjsdxy.com"};
+		var demo=new Vue({
+			el:'#box',
+			data :data
+		});
+		document.write(demo.name===data.name);
+		demo.url="www.fjsdxy.com;"
+		</script>
+	</body>
+</html>

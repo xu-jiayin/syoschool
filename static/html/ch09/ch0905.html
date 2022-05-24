@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		 <script src="../js/vue.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<!-- 基础用法 -->
+		<div id="box1">
+			<my-component></my-component>
+		</div>
+	
+		<script type="text/javascript">
+		var myMixin={
+			created:function(){
+				this.show();
+			},
+			methods:{
+				show:function(){
+					document.write('Vue.js中的混入')
+				}
+			}
+		}
+		Vue.component('my-component',{
+			mixins:[myMixin],
+			template:'<h3>Hello Vue.js</h3>'
+		});
+		var vm=new Vue({
+			el:'#box1'
+		});
+		</script>
+		<hr />	
+		<!-- 选项合并111 -->
+		<div id="box2">
+			<my-component></my-component>
+		</div>
+		<hr />
+			<script type="text/javascript">
+			var myMixin = {
+				data:function(){
+					return{
+						type :'图书',
+						number :10
+						}
+					}
+				}
+				Vue.component('my-component',{
+					mixins:[myMixin],
+					data : function(){
+						return{
+							type :'手机',
+							price :20
+							}
+					
+				},
+				template:'<div>\
+				<div>类型:{{type}}</div>\
+				<div>数量:{{number}}</div>\
+				<div>价格:{{price}}元</div>\
+				</div>'
+				});
+				var vm=new Vue({
+					el:'#box2'
+				});
+				</script>
+				<!-- 选项合并222 -->
+				<div id="box3">
+					<my-component></my-component>
+				</div>
+				
+					<script type="text/javascript">
+					var myMixin = {
+						created:function(){
+							this.show();
+						},
+					methods:{
+							show: function(){
+								document.write('混入调用<br>');
+							}
+							}
+						}
+						Vue.component('my-component',{
+							mixins:[myMixin],
+							created:function(){
+								document.write('组件调用');
+							}
+						});
+						var vm=new Vue({
+							el:'#box3'
+						});
+						</script>
+						<hr />
+						<div id="box4">
+							<my-component></my-component>
+						</div>
+						<script>
+						var myMixin={
+							methods:{
+								showName:function(){
+									document.write('人物名称：虚竹<br>');
+								},
+								showSchool:function(){
+									document.write('所属门派:少林派<br>');
+								}
+							}
+						}
+						Vue.component('my-component',{
+							mixins:[myMixin],
+							methods:{
+								showWugong:function(){
+									document.write('武功绝学：小无相助、天山折梅手、天山六阳掌<br>')
+								
+							},
+							showSchool:function(){
+								document.write('所属门派：逍遥派<br>');
+							}
+							},
+							created:function(){
+								this.showName();
+								this.showSchool();
+								this.showWugong();
+							}
+						});
+						var vm=new Vue({
+							el:'#box4'
+						});
+						
+						</script>
+	<hr />
+	
+	
+	<div id="box5">
+		<my-component></my-component>
+	</div>
+	<script>
+	Vue.mixin({
+		created:function(){
+			var myOption=this.$options.myOption;
+			if(myOption){
+				document.write(myOption);
+			}
+		}
+	});
+	Vue.component('my-component',{
+		myOption:'自定义选项'
+	});
+	var vm=new Vue({
+		el:'#box5'
+	});
+	
+	</script>
+	</body>
+</html>

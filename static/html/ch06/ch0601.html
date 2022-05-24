@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- 使用内联JavaScript语句 -->
+    <div id="box1">
+        <ul>
+            <button v-on:click="show('欢迎您')">显示</button>
+
+        </ul>
+    </div>
+    <hr/>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box5',
+            methods: {
+                show: function(name) {
+                    alert('百度' + name);
+                }
+            }
+        });
+    </script>
+    <!--  -->
+
+   <div id="box3">
+   			<a href="http://mingrisoft.com" v-on:click="show('明日科技欢迎您！',$event)">{{name}}</a>	
+   		</div>
+   		<script type="text/javascript">
+   			var vm=new Vue({
+   				el:'#box3',
+   				data:{
+   					name:'明日科技'
+   				},
+   				methods:{
+   					show:function(message,e){
+   						e.preventDefault();
+   			      alert(message);
+   			     }
+   				}
+   			});
+   		</script>
+
+
+</body>
+
+</html>

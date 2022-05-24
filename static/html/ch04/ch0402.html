@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+			<body>
+		</head>
+	<body>
+<div id="example"> 
+	<p>原字符串：{{str}}</p>
+	<p>新字符串：{{newstr}}</p>
+</div>
+	<script type="text/javascript">
+	var exam=new Vue({
+		el:'#example',
+		data:{
+			str:'HTML*JAVASCRIPT*VUE.js'
+		},
+		computed:{
+			newstr:function(){
+				return this.str.split('*').join('+');
+			}
+		}
+	})
+	</script>	
+		
+		
+		
+		
+		<div id="example2">
+			¥：<input type="number" v-model="rmb"><p>
+		    $：<input type="number" v-model="dollar"><p>
+			{{rmb}}人民币={{dollar | formatNum}}美元
+		</div>
+		
+		<script>	
+		var vm=new Vue({
+			el:'#example',
+			data:{
+				fullname:'HTML*JAVASCRIPT*VUE.js'
+			},
+			watch:{
+				fullname:function(newValue,oldValue){
+					alert("原值:"+oldValue+"新值:"+newValue);
+				}
+			}
+		})
+		vm.fullname='HTML+JAVASCRIPT+VUE.js';
+		
+		</script>
+		
+		<!-- <script>
+		var vm=new Vue({
+			el:'#example1',
+			data:{
+				fullname:'韦小宝'
+			}
+			})
+		vm.$watch:('fullname',function(newValue,oldValue){
+				alert("原值:"+oldValue+"新值:"+newValue);
+		});
+		vm.fullname='宋小宝';
+		
+		</script>
+		 -->
+		
+		<script type="text/javascript">
+		var exam = new Vue({
+			el:'#example2',
+			data:{
+				rate : 6.8,
+				rmb : 0,
+				dollar : 0
+			},
+			watch : {
+				rmb : function(val){
+					this.dollar = val / this.rate;//获取美元的值
+				},
+				dollar : function(val){
+					this.rmb = val * this.rate;//获取人民币的值
+				}
+			},
+			filters : {
+				formatNum : function(value){
+					return value.toFixed(2);//保留两位小数
+				}
+			}
+		})
+		</script>
+		
+		
+		
+		
+		
+	</body>
+
+	
+</html>

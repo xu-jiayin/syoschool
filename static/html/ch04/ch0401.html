@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+		<style>
+		body{
+		font-family:微软雅黑;
+		font-size:14px}
+		.title{
+		background: white;
+		font-size:18px;
+		}
+		.title,.content{
+		width:500px;
+		height:36px;
+		line-height:36px;
+		border: 1px solid #dddddd;}
+		.title:not(:first-child),.content{
+		border-top:none;}
+		.title div{
+		width:100px;
+		text-align:center;
+		float:left}
+		.content{
+		clear:both}
+		.content div{
+		width:100px;
+		text-align:center;
+		float:left}
+		p{
+		width:380px;
+		text-align:left;}
+			
+		</style>
+		
+	</head>
+	<body>
+		
+		
+		<br />
+		<div id="example">
+			<p>原字符串:{{str}}</p>
+			<p>新字符串:{{newstr}}</p>
+		</div>
+		<hr />
+		
+		<div id="example2">
+        <div class="title">
+            <div>商品名称</div>
+            <div>单价</div>
+            <div>数量</div>
+            <div>金额</div>
+        </div>
+        <div class="content" v-for="value in shop">
+            <div>{{value.name}}</div>
+            <div>{{value.price | twoDecimal}}</div>
+            <div>{{value.count}}</div>
+            <div>{{value.price*value.count | twoDecimal}}</div>
+        </div>
+        <p class="p1">合计：{{totalprice | formatPrice("¥")}}</p>
+    </div>
+		
+		<hr />
+		
+		<div id="example3">
+			<p>姓名:{{fullname}}</p>
+		</div>
+		<div id="example4">
+			<p>getter姓名:{{fullname}}</p>
+		</div>
+		<div id="example5">
+			<p>methods姓名:{{fullname()}}</p>
+		</div>
+		
+		<hr />
+		
+		<div id="app">
+			<input v-model="message">
+			<p>{{message}}</p>
+			<p>{{getTimeC}}</p>
+			<p>{{getTimeM()}}</p>
+		</div>
+		
+		<hr />
+		<div id="example6">
+        <div class="title">
+            <div>姓名</div>
+            <div>月度收入</div>
+            <div>专项扣除</div>
+            <div>个税</div>
+            <div>工资</div>
+        </div>
+        <div class="content" v-for="(value,index) in staff">
+            <div>{{value.name}}</div>
+            <div>{{value.income}}</div>
+            <div>{{insurance}}</div>
+            <div>{{wages[index]}}</div>
+            <div>{{value.income-insurance-wages[index]}}</div>
+        </div>
+    </div>
+		
+		
+		
+		<script type="text/javascript">
+			
+			var exam=new Vue({
+				el : '#example',
+				data : {
+					str : 'HTML*java*vue.js'
+				},
+				computed : {
+					newstr : function(){
+						return this.str.split('*').join('+');
+					}
+				}
+			});
+	
+			var exam = new Vue({
+	        el:'#example2',
+	        data:{
+		       shop : [{
+			name : 'OPPO R15',
+			price : 2999,
+			count : 3
+		},{
+			name : '华为P20',
+			price : 3699,
+			count : 2
+		}]
+	},
+	computed : {
+		totalprice : function(){
+			var total = 0;
+			this.shop.forEach(function(s){
+				total += s.price * s.count;
+			});
+			return total;
+		}
+	},
+	filters : {
+		twoDecimal : function(value){
+			return value.toFixed(2);
+		},
+		formatPrice : function(value,symbol){
+			return symbol + value.toFixed(2);
+		}
+	}
+});
+		
+	
+	var exam =new Vue({
+		el : '#example3',
+		data:{
+			surname : 'zhang',
+			name : 'shan'
+		},
+		computed : {
+			fullname : function(){
+				return this.surname + this.name;
+			}
+		}
+	});
+	
+	var exam =new Vue({
+		el : '#example4',
+		data:{
+			surname : 'zhang',
+			name : 'shan'
+		},
+		computed : {
+			fullname :{
+				get : function(){
+					return this.surname + this.name;
+				}
+			}
+		}
+	});
+	
+	var exam =new Vue({
+		el : '#example5',
+		data:{
+			surname : 'zhang',
+			name : 'shan'
+		},
+		methods : {
+			fullname : function(){
+				return this.surname + this.name;
+			}
+		}
+	});
+	
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			message : '',
+			time : '当前时间'
+		},
+		computed:{
+		getTimeC:function(){
+				var hour = new Date().getHours();
+				var minute = new Date().getMinutes();
+				var second = new Date().getSeconds();
+				return this.time + hour + ":" + minute + ":" +second;
+			}
+		},
+		methods:{
+		getTimeM: function(){//获取当前时间
+				var hour = new Date().getHours();
+				var minute = new Date().getMinutes();
+				var second = new Date().getSeconds();
+				return this.time + hour + ":" + minute + ":" +second;
+			}
+		}
+	});
+	
+		var vm = new Vue({
+        el:'#example6',
+        data:{
+            insurance : 1000,
+            threshold : 5000,
+            tax : 0.03,
+            staff : [{
+                name : '张无忌',
+                income : 6600,
+            },{
+                name : '令狐冲',
+                income : 8000,
+            },{
+                name : '韦小宝',
+                income : 7000,
+            }]
+        },
+        computed : {
+            wages : function(){
+                var t = this;
+                var taxArr = [];
+                this.staff.forEach(function(s){
+                    taxArr.push((s.income-t.threshold-t.insurance)*t.tax);
+                });
+                return taxArr;
+            }
+        }
+    })
+		
+		</script>	
+	</body>
+</html>

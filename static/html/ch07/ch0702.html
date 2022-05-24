@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+    
+    <!-- 多个复选框 -->
+    <div id="box2">
+        <p>单个复选框</p>
+        <input type="checkbox" value="oppo" v-model="brand" />
+        <label for="oppo">oppo</label>
+        <input type="checkbox" value="华为" v-model="brand" />
+        <label for="huawei">华为</label>
+        <input type="checkbox" value="小米" v-model="brand" />
+        <label for="xiaomi">小米</label>
+        <p>选择的手机品牌:{{brand}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box2',
+            data: {
+                brand: []
+            }
+        });
+    </script>
+    <!--  -->
+
+   
+    <!-- 绑定单选按钮 -->
+    <div id="box4">
+        <input type="radio" value="男" v-model="sex" />
+        <label for="man">男</label>
+        <input type="radio" value="女" v-model="sex" />
+        <label for="women">女</label>
+        <p>您的性别:{{sex}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box4',
+            data: {
+                sex: ''
+            }
+        });
+    </script>
+    <!--  -->
+
+	
+    <!-- 绑定下拉菜单 -->
+    <div id="box6">
+        <select v-model="type">
+				<option value="">请选择种类</option>
+				<option>手机</option>
+				<option>平板电脑</option>
+				<option>笔记本</option>
+			</select>
+        <p>选择的种类:{{type}}</p>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box6',
+            data: {
+                type: ''
+            }
+        });
+    </script>
+    <!--  -->
+
+    
+
+    <style>
+        body {
+            font-family: 微软雅黑
+        }
+        
+        .left {
+            float: left;
+            width: 100px;
+            text-align: center
+        }
+        
+        .left select {
+            width: 80px;
+            margin-top: 10px;
+        }
+        
+        .middle {
+            float: left;
+            width: 32px;
+            padding-top: 40px;
+        }
+        
+        .middle input {
+            margin-top: 10px;
+        }
+        
+        #box9 {
+            height: 200px;
+        }
+        
+        .right {
+            float: left;
+            width: 100px;
+            display: block;
+            text-align: center
+        }
+        
+        .right select {
+            width: 80px;
+            margin-top: 10px;
+        }
+    </style>
+   
+    <!-- 复选框 -->
+    <div id="box10">
+        <input type="checkbox" v-model="toggle" :true-value="yes" :false-value="no" />
+        <label for="checkbox">当前状态:{{toggle}}</label>
+    </div>
+    <hr />
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box10',
+            data: {
+                toggle: '',
+                yes: '选中',
+                no: '取消'
+            }
+        });
+    </script>
+    <!--  -->
+    <div id="box11">
+        <p>多个复选框</p>
+        <input type="checkbox" :value="brands[0]" v-model="brand" />
+        <label>{{brands[0]}}</label>
+        <input type="checkbox" :value="brands[1]" v-model="brand" />
+        <label>{{brands[1]}}</label>
+        <input type="checkbox" :value="brands[2]" v-model="brand" />
+        <label>{{brands[2]}}</label>
+        <p>选择的手机品牌{{brand.join('、')}}</p>
+    </div>
+    <hr />
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box11',
+            data: {
+                brands: ['OPPO', '华为', '小米'],
+                brand: []
+            }
+        });
+    </script>
+    <!-- 下拉菜单 -->
+   
+    <!-- 使用修饰符-->
+   
+</body>
+
+</html>

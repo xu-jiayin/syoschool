@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>轮播图切换效果</title>
+
+
+<style type="text/css">
+.banner{
+    position: relative;
+}
+.bannerImg{
+    position: relative;
+    height: 360px;
+}
+.bannerImg span{/* 设置图片定位 */
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.bannerBtn{
+    width: 200px;
+    position:absolute;
+    left:30%;
+	bottom:-20px;
+    text-align:center;
+}
+.bannerBtn li{
+	list-style:none;
+    border-radius: 50%;
+    float:left;
+ }
+.bannerBtn li a{/* 设置按钮样式 */
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5px;
+	color:#FFFFFF;
+	font-weight:bolder;
+	text-decoration:none;
+} 
+.bannerBtn li a.aBtn{/* 设置按钮过渡效果 */
+    transition:all .6s ease;
+}
+/* 设置过渡属性 */
+.fade-enter-active, .fade-leave-active{
+  transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
+</style>
+<script src="../JS/vue.js"></script>
+</head>
+<body>
+<div id="box">
+	<div class="banner">
+  		<!--切换的图片-->
+  		<div class="bannerImg">
+    		<transition-group name="fade" tag="div">
+      			<span v-for="(v,i) in banners" :key="i" v-if="(i+1)==index?true:false">
+        			<img width="700" height="400" :src="'images/'+v">
+      			</span>
+    		</transition-group>
+  		</div>
+  		<!--切换的小按钮-->
+  		<ul class="bannerBtn">
+    		<li v-for="num in 3">
+      			<a href="javascript:;" :style="{background:num==index?'#ff9900':'#CCCCCC'}" @mouseover='change(num)' class='aBtn'>{{num}}</a>
+    		</li>
+  		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+//创建根实例
+var vm = new Vue({
+	el : '#box',
+	data : {
+		banners : ['1.jpg','2.jpg','3.jpg'],
+        index : 1,　　　　　　　// 图片的索引。
+        flag : true,
+        timer : '',　　　　// 定时器ID
+	},
+	methods : {
+		next : function(){
+			// 下一张图片，图片索引为4时返回第一张
+            this.index = this.index + 1 == 4 ? 1 : this.index + 1;　  
+    	},
+    	change : function(num){
+        	// 单击按钮切换到对应图片
+        	if(this.flag){　　　
+            	this.flag = false;
+				// 过1秒钟后可以再次单击按钮切换图片
+				setTimeout(()=>{
+            		this.flag = true;
+        		},1000);
+            	this.index = num;　// 切换为选中的图片
+				clearTimeout(this.timer);// 取消定时器
+				// 过3秒钟图片轮换
+				this.timer = setInterval(this.next,1000);
+        	}
+    	}
+	},
+	mounted : function(){
+		// 过3秒钟图片轮换
+    	this.timer = setInterval(this.next,3000);
+	}
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

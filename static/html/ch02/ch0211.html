@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+</head>
+<body>
+	
+<div id="box">
+        <span>{{ nowdate | formatdate }}</span>
+    </div>
+    <script type="text/javascript">
+        var formatNum=function(num){
+            return num<10?"0"+num:num;
+        };
+
+        Vue.filter('formatdate',function(value){
+            var year=value.getFullYear();
+            var month=formatNum(value.getMonth()+1);
+            var date=formatNum(value.getDate());
+            var day=value.getDay();
+            var week="";
+            var hour=formatNum(value.getHours());
+            var minute=formatNum(value.getMinutes());
+            var second=formatNum(value.getSeconds());
+            switch(day){
+               case 1:                            
+                  week="星期1";                   
+                  break;                          
+               case 2:                            
+                  week="星期2";                   
+                  break;                          
+               case 3:                            
+                  week="星期3";                   
+                  break;                          
+               case 4:                           
+                  week="星期4";                   
+                  break;                          
+               case 5:                            
+                  week="星期5";                   
+                  break;                         
+               case 6:                           
+                  week="星期6";                   
+                  break;                          
+               default:                          
+                  week="星期7";                   
+                  break;                         
+            }
+            return "T："+year+"年"+month+"月"+date+"日 "+week+" "+hour+":"+minute+":"+second;
+        });
+        var demo = new Vue({
+            el : '#box',
+            data : {
+                nowdate : new Date()
+            },
+            mounted:function(){
+                var _this = this;
+                var timer = setInterval(function(){
+                    _this.nowdate = new Date();
+                },1000);
+            },
+            beforeDestroy:function(){
+                if(this.timer){
+                    clearInterval(this.timer);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
+

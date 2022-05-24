@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .item {
+            padding: 5px;
+        }
+        
+        .item:hover {
+            background-color: antiquewhite;
+        }
+        
+        .item img {
+            vertical-align: middle;
+            height: 80px;
+        }
+        
+        .item a {
+            vertical-align: middle;
+            height: 80px;
+            font-size: 22px;
+            text-decoration: none;
+            color: #999999;
+        }
+        
+        .item a:hover {
+            font-size: 22px;
+            color: #ff00ff;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>徐佳银</h1>
+    <div id="example">
+        <div>
+            <div class="item" v-for="book in books">
+                <img v-bind:src="book.image" width="80">
+                <span><a  v-bind:href="book.url">{{book.bookname}}</a></span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var exam = new Vue({
+            el: '#example',
+            data: {
+                books: [{
+                    bookname: "vue简介",
+                    image: 'image/bq.jpg',
+                    url: 'ch01/index.html'
+                }, {
+                    bookname: "基本特性",
+                    image: 'image/bq.jpg',
+                    url: 'ch02/index.html'
+                }, {
+                    bookname: "条件判断与列表渲染",
+                    image: 'image/bq.jpg',
+                    url: 'ch03/index.html'
+                }, {
+                    bookname: "计算机属性与监听属性",
+                    image: 'image/bq.jpg',
+                    url: 'ch04/index.html'
+                }, {
+                    bookname: "样式绑定",
+                    image: 'image/bq.jpg',
+                    url: 'ch05/index.html'
+                }, {
+                    bookname: "事件处理",
+                    image: 'image/bq.jpg',
+                    url: 'ch06/index.html'
+                }, {
+                    bookname: "表达控件绑定",
+                    image: 'image/bq.jpg',
+                    url: 'ch07/index.html'
+                }, {
+                    bookname: "自定义命令",
+                    image: 'image/bq.jpg',
+                    url: 'ch08/index.html'
+                }, {
+                    bookname: "组件",
+                    image: 'image/bq.jpg',
+                    url: 'ch09/index.html'
+                }, ]
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		 <script src="../js/vue.js" type="text/javascript"></script>
+		 <script src="ch0901.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<bt></bt>
+		</div>
+		<script type="text/javascript">
+		new Vue({
+		     el: '#app',
+					
+		 })
+		</script>
+		<div id="box4">
+			<my-component v-on:click.native="openDialog"></my-component>
+		</div>
+		<hr />
+		<script type="text/javascript">
+			Vue.component('my-component', {
+				template : '<div> \
+				<button>测试</button>\
+				</div>'
+			})
+			var vm = new Vue({
+				el:'#box4',
+				
+			  	methods: {
+			   		openDialog : function(){
+			    		alert("aaaa")
+			   		}
+			  	}
+			})
+		</script>
+		<!-- 1111 -->
+		<div id="box1">
+			<div v-bind:style="{fontSize: fontSize + 'px'}">
+		  		<my-font v-bind:text="text" v-on:enlarge="fontSize += 2"></my-font>
+			</div>
+		</div>
+		<hr />
+		<script type="text/javascript">
+		//注册全局组件
+		Vue.component('my-font', {
+			props : ['text'],
+			template : '<div> \
+				<button v-on:click="action">放大文本</button> \
+				<p>{{text}}</p> \
+			  </div>',
+			methods : {
+				action : function(){
+					this.$emit('enlarge');
+				}
+			}
+		})
+		//创建根实例
+		var vm = new Vue({
+			el:'#box1',
+			data: {
+		        text : '千里之行始于足下',
+				fontSize : 16
+		    }
+		})
+		</script>
+		<!--2222  -->
+		<style>
+		body{
+		font-family:微软雅黑}
+		.nav{
+			display:inline-block;
+		font-size: 30px;
+		color: #0000FF;
+		margin:20px;
+		}
+		
+		.active{
+		color:#ff0000;
+		}
+		</style>
+		<script src="../JS/vue.js"></script>
+		</head>
+		<body>
+		<div id="box2">
+			<my-menu @select-item="onSelectItem" :flag="flag"></my-menu>
+		</div>
+		<hr />
+		<script type="text/javascript">
+		//注册全局组件
+		Vue.component('my-menu', {
+			props : ['flag'],
+			template : '<div class="nav"> \
+		  		<span  v-on:click="a1" @click="select(1)" :class="{active: flag===1}">音乐</span> \
+		  		<span  v-on:click="a2" @click="select(2)" :class="{active: flag===2}">体育</span> \
+		  		<span  v-on:click="a3" @click="select(3)" :class="{active: flag===3}">影视</span> \
+				<span  v-on:click="a4" @click="select(4)" :class="{active: flag===4}">图片</span> \
+		 	  </div>',
+		  	methods: {
+		    	select (value) {
+		      		this.$emit('select-item', value)
+		   		},
+				a1:function(){
+					alert('1')
+				},
+				a2:function(){
+					alert('2')
+				},
+				a3:function(){
+					alert('3')
+				},
+				a4:function(){
+					alert('4')
+				}
+		  	}
+			
+		})
+		//创建根实例
+		var vm = new Vue({
+			el:'#box2',
+			data: {
+		        flag : 1
+		    },
+		  	methods: {
+		   		onSelectItem : function(value){
+		    		this.flag = value
+		   		}
+		  	}
+		})
+		</script>
+		<!-- 3333 -->
+		<div id="box3">
+			<my-component v-on:click.native="openDialog"></my-component>
+		</div>
+		<hr />
+		<script type="text/javascript">
+			Vue.component('my-component', {
+				template : '<div> \
+				<button>单击按钮弹出对话框</button>\
+				</div>'
+			})
+			var vm = new Vue({
+				el:'#box3',
+				
+			  	methods: {
+			   		openDialog : function(){
+			    		alert("欢迎访问本网站")
+			   		}
+			  	}
+			})
+		</script>
+		
+		
+		
+		
+		
+	</body>
+</html>

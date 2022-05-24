@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>选项卡切换</title>
+<script src="../js/vue.js"></script>
+
+<style type="text/css">
+*{
+margin:0;
+padding:0;
+overflow:hidden;}
+body{
+font-family:微软雅黑}
+.box{
+width:306px;
+margin:10px auto
+}
+ul{
+list-style:none}
+ul.mainmenu li{
+float:left;
+	background:#fefefe;
+	background:-webkit-gradient(linear,left top,left bottom, from(#ffffff), to(#eeeeee));
+	border:1px solid #000000;
+	padding:5px 0;
+	width:100px;
+	text-align:center;
+	
+	cursor:pointer;
+	color:#000000;}
+.music .music,.videos .videos,.news .news{
+border-bottom:none;
+	background:#000000;}
+.box>div{
+clear:both;
+	border:1px solid #ccc;
+	border-top:none;
+	width:304px;
+	height:100px;
+	padding-top:20px;
+	text-align:center;font-size:14px; margin-top:-1px;
+	}
+</style>
+
+</head>
+<body>
+<div id="box1">
+	<div class="box">
+		<ul class="mainmenu" :class="current">
+			<li class="music" v-on:click="current='music'">音乐</li>
+			<li class="videos" v-on:click="current='videos'">视频</li>
+			<li class="news" v-on:click="current='news'">新闻</li>
+		</ul>
+		<component :is="current"></component>
+	</div>
+</div>
+<script type="text/javascript">
+//创建根实例
+var vm = new Vue({
+	el : '#box1',
+	data : {
+		current : 'music'
+	},
+	//注册局部组件
+	components : {
+		music : {
+			template : '<div>音乐内容</div>'
+		},
+		videos : {
+			template : '<div>视频内容</div>'
+		},
+		news : {
+			template : '<div>新闻内容</div>'
+		}
+	}
+});
+</script>
+
+
+
+<style type="text/css">
+*{
+margin:0;
+padding:0;
+overflow:hidden;}
+body{
+font-family:微软雅黑}
+.box{
+width:306px;
+margin:10px auto
+}
+ul{
+list-style:none}
+ul.mainmenu li{
+float:left;
+	background:#fefefe;
+	background:-webkit-gradient(linear,left top,left bottom, from(#ffffff), to(#eeeeee));
+	border:1px solid #ccc;
+	padding:5px 0;
+	width:100px;
+	text-align:center;
+	
+	cursor:pointer;
+	color:#000000;}
+.submenu{ width:100px;
+height:80px;
+border-right:1px solid #999999}
+.submenu ul{
+width:80px;
+margin:0 auto;}
+.submenu li{
+width:80px;
+height:26px;
+line-height:26px;
+cursor:pointer;
+font-size:14px;
+text-align:center
+}
+.submenu li:hover{
+background:#000000}
+.sub div{
+float:left;
+display:inline-block;font-size:14px}
+.sub div{
+margin-right:10px;}
+.music .music,.videos .videos,.news .news{
+border-bottom:none;
+	background:#fff;}
+.popular .popular,.national .national,.classical .classical{
+background:#DDEEFF}
+.box>div{
+clear:both;
+	border:1px solid #ccc;
+	border-top:none;
+	width:304px;
+	height:100px;
+	padding-top:20px;
+	text-align:center;font-size:14px; margin-top:-1px;
+	}
+</style>
+
+<div id="example">
+	<div class="box">
+		<ul class="mainmenu" :class="current">
+			<li class="music" v-on:click="current='music'">音乐</li>
+			<li class="videos" v-on:click="current='videos'">视频</li>
+			<li class="news" v-on:click="current='news'">新闻</li>
+		</ul>
+		<keep-alive>
+		<component :is="current"></component>
+		</keep-alive>
+	</div>
+</div>
+<script type="text/javascript">
+//创建根实例
+var vm = new Vue({
+	el : '#example',
+	data : {
+		current : 'music'
+	},
+	components : {
+		music : {
+			data : function(){
+				return {
+					subcur : 'popular'
+				}
+			},
+			template : `<div class="sub">
+			  <div class="submenu">
+				<ul :class="subcur">
+					<li class="popular" v-on:click="subcur='popular'">流行音乐</li>
+					<li class="national" v-on:click="subcur='national'">民族音乐</li>
+					<li class="classical" v-on:click="subcur='classical'">古典音乐</li>
+				</ul>
+			  </div>
+			  <component :is="subcur"></component>
+			 </div>`,
+			components : {//注册子组件
+				popular : {
+					template : '<div>流行音乐内容</div>',
+				},
+				national : {
+					template : '<div>民族音乐内容</div>',
+				},
+				classical : {
+					template : '<div>古典音乐内容</div>',
+				}
+			} 
+		},
+		videos : {
+			template : '<div>视频内容</div>'
+		},
+		news : {
+			template : '<div>新闻内容</div>'
+		}
+	}
+});
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

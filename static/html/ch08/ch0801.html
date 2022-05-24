@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+
+</head>
+<style>
+#box6{
+	height: 50px;
+}
+img{
+	position: absolute;
+}
+
+</style>
+<body>
+    <!-- 注册全局指令 -->
+    <div id="box1">
+        <input v-focus />
+    </div>
+    <hr />
+    <script type="text/javascript">
+        Vue.directive('focus', {
+            inserted: function(el) {
+                el: focus();
+            }
+        })
+        var vm = new Vue({
+            el: '#box1'
+        })
+    </script>
+
+
+    <!-- 注册局部指令 -->
+    <div id="box2">
+        <span v-add-border="border">坚持不懈</span>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box2',
+            data: {
+                border: '1px solid #ff00ff'
+            },
+            directives: {
+                addBorder: {
+                    inserted: function(el, binding) {
+                        el.style.border = binding.value
+                    }
+                }
+            }
+        })
+    </script>
+    <!-- 钩子函数 -->
+    <div id="box3" v-demo:hello.a.b="message"></div>
+    <hr/>
+    <script type="text/javascript">
+        Vue.directive('demo', {
+            bind: function(el, binding, vnode) {
+                el.innerHTML =
+                    'name:' + binding.name + '<br>' +
+                    'value:' + binding.value + '<br>' +
+                    'expression:' + binding.expression + '<br>' +
+                    'argument:' + binding.arg + '<br>' +
+                    'modifiers:' + JSON.stringify(binding.modifiers) + '<br>' +
+                    'vnode keys:' + Object.keys(vnode).join(',')
+
+            }
+        })
+        var vm = new Vue({
+            el: '#box3',
+            data: {
+                message: '欢迎访问明日学院！'
+            }
+        })
+    </script>
+	<!--  -->
+	<div id="box4">
+	  	边框宽度：<input type="text" v-model="border">
+		<p>
+			<img width="200" src="js.jpg" v-set-border="border">
+		</p>
+	</div>
+	<hr />
+	<script type="text/javascript">
+	var vm = new Vue({
+		el:'#box4',
+		data: {
+	        border: ''
+	    },
+	    directives: {
+	        setBorder: {
+	            update: function (el,binding) {
+					el.border = binding.value;//设置元素边框
+	            }
+	        }
+	    }
+	})
+	</script>
+	<!--  -->
+	<div id="box5">
+		<label>选择文字大小：</label>
+	  	<select v-model="size">
+			<option value="20px">20px</option>
+			<option value="30px">30px</option>
+			<option value="40px">40px</option>
+			<option value="50px">50px</option>
+			<option value="60px">60px</option>
+		</select>
+		<p v-font-size="size">天生我材必有用</p>
+	</div>
+	<hr />
+	<script type="text/javascript">
+	var vm = new Vue({
+		el:'#box5',
+		data: {
+	        size: '20px'
+	    },
+	    directives: {
+	        fontSize: function (el,binding) {
+				el.style.fontSize = binding.value;//设置字体大小
+	        }
+	    }
+	})
+	</script>
+	
+		<!-- 绑定数值常量 -->
+	<div id="box6">
+	    <p v-set-position="50" />越努力越幸运</p>
+	</div>
+	<hr />
+</div>
+
+	<script type="text/javascript">
+	    Vue.directive('set-position', function(el,binding){
+	      
+	            el.style.position='fixed';
+				el.style.left=binding.value+'px';
+	        })
+	    var vm = new Vue({
+	        el: '#box6'
+	    })
+	</script>
+	<!-- 绑定字符串常量 -->
+		
+		<div id="box7">
+		    <p v-set-color="'#0000ff'" />天才出于勤奋</p>
+		</div>
+		<hr />
+		<script type="text/javascript">
+		    Vue.directive('set-color', function(el,binding){	      
+		            el.style.color=binding.value;
+		        })
+		    var vm = new Vue({
+		        el: '#box7'
+		    })
+		</script>
+		<!-- 绑定对象串常量 -->
+			
+			<div id="box8">
+			    <p v-set-style="{size:30,color:'gray'}" />千里之行始于足下</p>
+			</div>
+			<hr />
+			<script type="text/javascript">
+			    Vue.directive('set-style', function(el,binding){	      
+			            el.style.fontsize=binding.value.size+'px';
+						el.style.color=binding.value.color;
+			        })
+			    var vm = new Vue({
+			        el: '#box8'
+			    })
+			</script>
+
+	<!-- 上机指导 -->
+		<div id="box9">
+		    <img src="banner.jpg" v-move>
+		</div>
+		<script type="text/javascript">
+		var vm = new Vue({
+			el:'#box9',
+		    directives: {
+		        move: function (el) {
+					//按下鼠标
+					el.onmousedown = function(e) {
+						var initX = el.offsetLeft;
+						var initY = el.offsetTop;
+						var offsetX = e.clientX - initX;
+						var offsetY = e.clientY - initY;
+						//移动鼠标
+						document.onmousemove = function(e) {
+							var x = e.clientX - offsetX;
+							var y = e.clientY - offsetY;
+							var maxX = document.documentElement.clientWidth - el.offsetWidth;
+							var maxY = document.documentElement.clientHeight - el.offsetHeight;
+							if(x <= 0) x = 0;
+							if(y <= 0) y = 0;
+							if(x >= maxX) x = maxX;
+							if(y >= maxY) y = maxY;
+							el.style.left = x + "px";
+							el.style.top = y + "px";
+							return false;
+						}
+					}
+					//松开鼠标
+					document.onmouseup = function() {
+		        		document.onmousemove = null;
+		    		}
+		        }
+		    }
+		})
+		</script>
+		
+		
+	
+</body>
+
+</html>

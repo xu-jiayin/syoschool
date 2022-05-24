@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>
+				<title>v-show指令</title>
+	</head>
+	<body>
+		
+		<div id="box">
+			<input type="button" :value="bText" v-on:click="toggle">
+			<div v-show="show">
+				<img src="face.jpg">
+			</div>
+		</div>
+		<script type="text/javascript">
+		    var demo = new Vue({
+		        el : '#box',
+		        data : {
+					bText : '隐藏图片',
+					show : true
+				},
+				methods : {
+					toggle : function(){
+						//切换按钮文字
+						this.bText == '隐藏图片' ? this.bText = '显示图片' : this.bText = '隐藏图片';
+						this.show = !this.show;//修改属性值
+					}
+				}
+		    });
+		</script>
+	</body>
+</html>

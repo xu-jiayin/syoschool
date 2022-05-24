@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box1">
+        <bt style="text-align: center;"></bt>
+    </div>
+    <hr />
+    <script type="text/javascript">
+        var bt = Vue.extend({
+            template: '<h2>徐佳银</h2>'
+        });
+        Vue.component('bt', bt)
+        var vm = new Vue({
+            el: '#box1'
+        })
+    </script>
+    <a href="ch0801.html">第八章</a>
+</body>
+
+</html>

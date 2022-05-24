@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/vue.js" type="text/javascript"  charset="utf-8"></script>		<title>v-else-if指令</title>
+	</head>
+	<body>
+		
+		<div id="box">
+			<div v-if="score>=90">
+				刘星的考试成绩优秀
+			</div>
+			<div v-else-if="score>=75">
+				刘星的考试成绩良好
+			</div>
+			<div v-else-if="score>=60">
+				刘星的考试成绩及格
+			</div>
+			<div v-else>
+				刘星的考试成绩不及格
+			</div>
+		</div>
+		<script type="text/javascript">
+		    var demo = new Vue({
+		        el : '#box',
+		        data : {
+					score : 85
+				}
+		    });
+		</script>
+	</body>
+</html>
